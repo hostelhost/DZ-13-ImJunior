@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private CubeBilder _cubeBilder;
+    [SerializeField] private CubeBuilder _cubeBilder;
 
     private List<Vector3> _SpawnPositions = new();
 
@@ -14,6 +14,19 @@ public class Spawner : MonoBehaviour
 
         foreach (SpawnPosition position in positions)
             _SpawnPositions.Add(position.transform.position);
+    }
+
+    private float timer;
+
+    private void Update() //
+    {
+        timer += Time.deltaTime;
+
+        if (timer > 1)
+        {
+            timer = 0;
+            CreateCube();
+        }
     }
 
     private Vector3 RandomPosition()

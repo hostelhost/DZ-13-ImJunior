@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CubeBilder : MonoBehaviour
+public class CubeBuilder : MonoBehaviour
 {
     [SerializeField] private Cube _cube;
     [SerializeField] private int _minimumLifetime = 2;
@@ -10,6 +10,6 @@ public class CubeBilder : MonoBehaviour
     {
         Cube newCube = _cube;
         Instantiate(newCube, position, Quaternion.identity);
-        newCube.Initialize(Random.Range(_minimumLifetime, ++_maximumLifetime));
+        newCube.Start(Random.Range(_minimumLifetime, _maximumLifetime+1));
     }
 }
