@@ -10,6 +10,6 @@ public class CubeBuilder : MonoBehaviour
     {
         Cube newCube = _cube;
         Instantiate(newCube, position, Quaternion.identity);
-        newCube.Start(Random.Range(_minimumLifetime, _maximumLifetime+1));
+        newCube.Initialize(Random.Range(_minimumLifetime, _maximumLifetime+1));
     }
 }

@@ -7,26 +7,22 @@ public class Cube : MonoBehaviour
     private int _lifetime;
     private bool _isCollision;
 
-    public void Start(int lifetime)
+    public void Initialize(int lifetime)
     {
         _lifetime = lifetime;
+        Debug.Log(_lifetime + "Initialize");
     }
-
-    //public void Initialize(int lifetime)
-    //{
-    //    _lifetime = lifetime;
-    //}
 
     private IEnumerator TimerToDeath()
     {
-        Debug.Log(_lifetime);
+        Debug.Log(_lifetime+ "TimerToDeath");
 
-        for (float t = 0; t < 5; t += Time.deltaTime)
-        {
-            yield return null; //прерывает корутину до следующего Updat-a
-        }
+        //for (float t = 0; t < _lifetime; t += Time.deltaTime)
+        //{
+        //    yield return null; //прерывает корутину до следующего Updat-a
+        //}
 
-        //yield return new WaitForSecondsRealtime(_lifetime);
+        yield return new WaitForSeconds(5);
 
         Destroy(gameObject);
     }
