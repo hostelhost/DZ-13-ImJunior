@@ -8,8 +8,7 @@ public class CubeBuilder : MonoBehaviour
 
     public void Create(Vector3 position)
     {
-        Cube newCube = _cube;
-        Instantiate(newCube, position, Quaternion.identity);
+        Cube newCube = Instantiate(_cube, position, Quaternion.identity);
         newCube.Initialize(Random.Range(_minimumLifetime, _maximumLifetime+1));
     }
 }

@@ -1,41 +1,27 @@
-using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private CubeBuilder _cubeBilder;
+    [SerializeField] private float _creationTime = 0.2f;
+    private ObjectPool<GameObject> _pool;
 
-    private List<Vector3> _SpawnPositions = new();
-
-    private void Awake()
-    {
-        List<SpawnPosition> positions = new(positions = GetComponentsInChildren<SpawnPosition>().ToList());
-
-        foreach (SpawnPosition position in positions)
-            _SpawnPositions.Add(position.transform.position);
+    private void Start()
+    {     
+        InvokeRepeating(nameof(CreateCube), _creationTime, _creationTime);
     }
 
-    private float timer;
-
-    private void Update() //
+    private Vector3 GetRandomPositionInSphere()
     {
-        timer += Time.deltaTime;
-
-        if (timer > 1)
-        {
-            timer = 0;
-            CreateCube();
-        }
-    }
-
-    private Vector3 RandomPosition()
-    {
-        return _SpawnPositions[Random.Range(0, _SpawnPositions.Count)];
+        int diameterToRadius = 2;
+        Vector3 randomPoint = transform.position + Random.insideUnitSphere * transform.localScale.x / diameterToRadius;
+        return randomPoint;
     }
 
     private void CreateCube()
     {
-        _cubeBilder.Create(RandomPosition());
+        _cubeBilder.Create(GetRandomPositionInSphere());
     }
 }
